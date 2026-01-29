@@ -464,12 +464,14 @@ def internal_error(error):
 # ========== MAIN ==========
 
 if __name__ == '__main__':
+    # Use PORT environment variable for deployment (Render, Heroku, etc.)
+    port = int(os.environ.get('PORT', 5000))
+    
     logger.info("\n" + "="*70)
     logger.info("  WATER CONSUMPTION FORECASTING API SERVER")
     logger.info("="*70)
-    logger.info(f"Starting API server on http://localhost:5000")
-    logger.info("Dashboard available at http://localhost:5000/")
+    logger.info(f"Starting API server on port {port}")
+    logger.info(f"Dashboard available at http://0.0.0.0:{port}/")
     logger.info("="*70 + "\n")
     
-    app.run(debug=False, host='0.0.0.0', port=5000, threaded=True)
-
+    app.run(debug=False, host='0.0.0.0', port=port, threaded=True)
